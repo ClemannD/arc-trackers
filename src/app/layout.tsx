@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { TRPCReactProvider } from '@/trpc/react';
 import { ThemeProvider } from '@/components/theme-provider';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 export const metadata: Metadata = {
   title: 'Clemann Next Starter',
@@ -22,9 +23,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <NuqsAdapter>{children}</NuqsAdapter>
+          </TRPCReactProvider>
         </ThemeProvider>
       </body>
+      {/* <script
+        async
+        src="https://cdn.metaforge.app/arcraiders-tooltips.min.js"
+      /> */}
     </html>
   );
 }

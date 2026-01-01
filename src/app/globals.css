@@ -110,6 +110,40 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+
+  /* Item Rarity Colors - Solid */
+  --rarity-common-color: #717471;
+  --rarity-uncommon-color: #41eb6a;
+  --rarity-rare-color: #1ecbfc;
+  --rarity-epic-color: #d8299b;
+  --rarity-legendary-color: #fbc700;
+
+  /* Item Rarity Colors - Gradients */
+  --rarity-common-gradient: linear-gradient(
+    to right,
+    rgb(153 159 165 / 25%) 0%,
+    rgb(5 13 36) 100%
+  );
+  --rarity-uncommon-gradient: linear-gradient(
+    to right,
+    rgb(86 203 134 / 25%) 0%,
+    rgb(5 13 36) 100%
+  );
+  --rarity-rare-gradient: linear-gradient(
+    to right,
+    rgb(30 150 252 / 30%) 0%,
+    rgb(5 13 36) 100%
+  );
+  --rarity-epic-gradient: linear-gradient(
+    to right,
+    rgb(216 41 155 / 25%) 0%,
+    rgb(5 13 36) 100%
+  );
+  --rarity-legendary-gradient: linear-gradient(
+    to right,
+    rgb(251 199 0 / 25%) 0%,
+    rgb(5 13 36) 100%
+  );
 }
 
 @layer base {
@@ -118,5 +152,58 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Item Rarity Background Gradients */
+  .bg-rarity-common {
+    background: var(--rarity-common-gradient);
+  }
+  .bg-rarity-uncommon {
+    background: var(--rarity-uncommon-gradient);
+  }
+  .bg-rarity-rare {
+    background: var(--rarity-rare-gradient);
+  }
+  .bg-rarity-epic {
+    background: var(--rarity-epic-gradient);
+  }
+  .bg-rarity-legendary {
+    background: var(--rarity-legendary-gradient);
+  }
+
+  /* Item Rarity Text Colors */
+  .text-rarity-common {
+    color: var(--rarity-common-color);
+  }
+  .text-rarity-uncommon {
+    color: var(--rarity-uncommon-color);
+  }
+  .text-rarity-rare {
+    color: var(--rarity-rare-color);
+  }
+  .text-rarity-epic {
+    color: var(--rarity-epic-color);
+  }
+  .text-rarity-legendary {
+    color: var(--rarity-legendary-color);
+  }
+
+  /* Item Rarity Border Colors */
+  .border-rarity-common {
+    border-color: var(--rarity-common-color);
+  }
+  .border-rarity-uncommon {
+    border-color: var(--rarity-uncommon-color);
+  }
+  .border-rarity-rare {
+    border-color: var(--rarity-rare-color);
+  }
+  .border-rarity-epic {
+    border-color: var(--rarity-epic-color);
+  }
+  .border-rarity-legendary {
+    border-color: var(--rarity-legendary-color);
   }
 }

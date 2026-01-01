@@ -9,12 +9,12 @@ import { CACHE_TIME, gameDataKeys } from '../query-keys';
 
 /**
  * Fetch all quests with 24-hour cache.
- * Uses a high limit to get all quests in a single request.
+ * The API proxy handles pagination internally and returns all quests.
  */
 export function useAllQuests() {
   return useQuery({
     queryKey: gameDataKeys.quests.list(),
-    queryFn: () => getQuests({ limit: 10000 }),
+    queryFn: () => getQuests(),
     staleTime: CACHE_TIME.staleTime,
     gcTime: CACHE_TIME.gcTime,
     select: (response) => response.data,
@@ -119,7 +119,7 @@ export function useFilteredQuests(filters: QuestFilters = {}) {
 export function useQuest(id: string | undefined) {
   return useQuery({
     queryKey: gameDataKeys.quests.detail(id ?? ''),
-    queryFn: () => getQuests({ limit: 10000 }),
+    queryFn: () => getQuests(),
     staleTime: CACHE_TIME.staleTime,
     gcTime: CACHE_TIME.gcTime,
     select: (response) => response.data.find((quest) => quest.id === id),

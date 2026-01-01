@@ -9,12 +9,12 @@ import { CACHE_TIME, gameDataKeys } from '../query-keys';
 
 /**
  * Fetch all items with 24-hour cache.
- * Uses a high limit to get all items in a single request.
+ * The API proxy handles pagination internally and returns all items.
  */
 export function useAllItems() {
   return useQuery({
     queryKey: gameDataKeys.items.list(),
-    queryFn: () => getItems({ limit: 10000 }),
+    queryFn: () => getItems(),
     staleTime: CACHE_TIME.staleTime,
     gcTime: CACHE_TIME.gcTime,
     select: (response) => response.data,
@@ -86,7 +86,9 @@ export function useFilteredItems(filters: ItemFilters = {}) {
 
     // Filter by subcategory
     if (filters.subcategory) {
-      result = result.filter((item) => item.subcategory === filters.subcategory);
+      result = result.filter(
+        (item) => item.subcategory === filters.subcategory,
+      );
     }
 
     // Filter by loadout slot
@@ -144,7 +146,7 @@ export function useFilteredItems(filters: ItemFilters = {}) {
 export function useItem(id: string | undefined) {
   return useQuery({
     queryKey: gameDataKeys.items.detail(id ?? ''),
-    queryFn: () => getItems({ limit: 10000 }),
+    queryFn: () => getItems(),
     staleTime: CACHE_TIME.staleTime,
     gcTime: CACHE_TIME.gcTime,
     select: (response) => response.data.find((item) => item.id === id),
@@ -193,15 +195,24 @@ export function useItemFilterOptions() {
     }
 
     return {
-      itemTypes: [...new Set(items.map((i) => i.item_type).filter(Boolean))].sort(),
+      itemTypes: [
+        ...new Set(items.map((i) => i.item_type).filter(Boolean)),
+      ].sort(),
       rarities: [...new Set(items.map((i) => i.rarity).filter(Boolean))].sort(
         (a, b) => (RARITY_ORDER[a] ?? 0) - (RARITY_ORDER[b] ?? 0),
       ),
-      workbenches: [...new Set(items.map((i) => i.workbench).filter(Boolean))].sort() as string[],
-      subcategories: [...new Set(items.map((i) => i.subcategory).filter(Boolean))].sort() as string[],
-      loadoutSlots: [...new Set(items.flatMap((i) => i.loadout_slots ?? []))].sort(),
-      shieldTypes: [...new Set(items.map((i) => i.shield_type).filter(Boolean))].sort() as string[],
+      workbenches: [
+        ...new Set(items.map((i) => i.workbench).filter(Boolean)),
+      ].sort() as string[],
+      subcategories: [
+        ...new Set(items.map((i) => i.subcategory).filter(Boolean)),
+      ].sort() as string[],
+      loadoutSlots: [
+        ...new Set(items.flatMap((i) => i.loadout_slots ?? [])),
+      ].sort(),
+      shieldTypes: [
+        ...new Set(items.map((i) => i.shield_type).filter(Boolean)),
+      ].sort() as string[],
     };
   }, [items]);
 }
-
