@@ -2,20 +2,12 @@
 // Learn more: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../.generated/prisma"
+  provider = "prisma-client"
+  output   = "./generated"
 }
 
-// Database Configuration
-// ====================
-// Currently using SQLite for simplicity
-// To switch databases:
-// 1. Change the provider below (postgresql, mysql, mongodb, etc.)
-// 2. Update the DATABASE_URL in your .env file
-// 3. Run: npx prisma generate && npx prisma db push
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
 // Authentication Models
