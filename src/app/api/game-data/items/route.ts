@@ -19,7 +19,7 @@ interface ExternalResponse {
 }
 
 async function fetchPage(page: number): Promise<ExternalResponse> {
-  const url = `${EXTERNAL_API}/items?page=${page}&limit=${PAGE_SIZE}`;
+  const url = `${EXTERNAL_API}/items?page=${page}&limit=${PAGE_SIZE}&includeComponents=true`;
   const response = await fetch(url);
 
   if (!response.ok) {

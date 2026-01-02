@@ -103,6 +103,11 @@ export function useFilteredItems(filters: ItemFilters = {}) {
       result = result.filter((item) => item.shield_type === filters.shieldType);
     }
 
+    // Hide blueprints from the list
+    result = result.filter(
+      (item) => !item.item_type.toLowerCase().includes('blueprint'),
+    );
+
     // Sort
     if (filters.sortBy) {
       const sortOrder = filters.sortOrder === 'desc' ? -1 : 1;

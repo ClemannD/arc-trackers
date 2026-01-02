@@ -5,6 +5,7 @@ import { useAllItems } from '@/lib/arc-raiders-data-api/hooks/use-items';
 import { getRarityClasses } from '@/lib/arc-raiders-data-api/helpers/rarity-classes.helper';
 import Image from 'next/image';
 import { Package } from 'lucide-react';
+import CraftingTree from './crafting-tree';
 
 export default function ItemView() {
   const [itemId] = useQueryState('itemId');
@@ -23,7 +24,7 @@ export default function ItemView() {
   const rarityClasses = getRarityClasses(selectedItem.rarity);
 
   return (
-    <div className="h-full flex-1 overflow-y-auto p-6">
+    <div className="max-h-screen flex-1 overflow-y-auto p-6">
       <div className="space-y-6">
         {/* Header with image and name */}
         <div className="flex items-start gap-6">
@@ -111,6 +112,9 @@ export default function ItemView() {
             </p>
           </div>
         )}
+
+        {/* Crafting Tree */}
+        <CraftingTree item={selectedItem} />
       </div>
     </div>
   );

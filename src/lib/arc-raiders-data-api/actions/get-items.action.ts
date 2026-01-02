@@ -42,12 +42,7 @@ function buildQueryString(params: GetItemsRequest): string {
   if (params.shield_type) {
     searchParams.append('shield_type', params.shield_type);
   }
-  if (params.includeComponents !== undefined) {
-    searchParams.append(
-      'includeComponents',
-      params.includeComponents.toString(),
-    );
-  }
+  searchParams.append('includeComponents', 'true');
   if (params.sortBy) {
     searchParams.append('sortBy', params.sortBy);
   }
