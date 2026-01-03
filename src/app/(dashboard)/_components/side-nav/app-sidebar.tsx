@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Package, FileText, Settings } from 'lucide-react';
+import { Home, Package, FileText, ScrollText } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -31,6 +31,11 @@ const navItems = [
     title: 'Items',
     url: '/items',
     icon: Package,
+  },
+  {
+    title: 'Quests',
+    url: '/quests',
+    icon: ScrollText,
   },
   {
     title: 'Notes',
