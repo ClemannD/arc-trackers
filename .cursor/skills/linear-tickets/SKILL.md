@@ -13,17 +13,17 @@ family: meta
 
 **Always search first.** Duplicate tickets waste time and fragment discussion.
 
-### Step 1: Find the project
+### Step 1: Find the Linear project (slug or name)
 
-```
-list_projects
-```
+**Prefer repo docs over MCP listing.**
 
-Or if you know the name:
+1. **Read the project’s `AGENTS.md`** (repo root). The **Linear** section almost always names the team and the **Linear project** (slug or display name you pass to `project` on `save_issue` / `list_issues`).
+2. If `AGENTS.md` doesn’t list it, skim **`README.md`** for the same (many repos document Linear there).
+3. **Only if you still don’t have a project:** use MCP to discover it:
+   - `list_projects` to browse, or
+   - `get_project(query: "…")` when you have a rough name.
 
-```
-get_project(query: "card-scores")
-```
+Do **not** call `list_projects` first when you already have the repo open—check `AGENTS.md` / `README` first.
 
 ### Step 2: Search for existing issues
 
@@ -71,13 +71,15 @@ Use markdown. Include:
 ## When discussing from a project context
 
 If working in a specific project repo:
-1. The project's AGENTS.md tells you which Linear project to use
-2. Search that project first
-3. Include links to relevant code or PRs in the issue description
+
+1. **Resolve the Linear project from `AGENTS.md`**, then **`README.md` if needed** (same as Step 1).
+2. Search that project first (`list_issues(project: "…", …)`).
+3. Include links to relevant code or PRs in the issue description.
 
 ## When discussing from phone / remote
 
-If no repo context:
-1. Ask which project this relates to (or infer from the conversation)
-2. Use `get_project` to confirm the Linear project name
-3. Follow the same check-before-create flow
+If you don’t have the repo handy:
+
+1. Ask which project this relates to (or infer from the conversation).
+2. If you can open the repo later, still prefer **`AGENTS.md` / `README`** for the canonical project name.
+3. Otherwise use `get_project` / `list_projects` to resolve the project, then follow the same check-before-create flow.
